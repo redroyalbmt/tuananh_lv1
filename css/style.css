@@ -1,0 +1,17 @@
+*{
+    font-family: 'Times New Roman', Times, serif;
+}
+.maintainer{
+    width: 100% !important;
+    margin-top: 0px;
+}
+.nav-link{
+    cursor: pointer;
+}
+.tablerow{
+    width: 97%;
+    margin: 0px auto;
+}
+span{
+    font-size: 18px;
+}
