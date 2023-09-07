@@ -8,7 +8,7 @@ buttons.forEach((el,index) => {
       item.id=index;
       item.name=productnames[index].innerText;
       item.price=productprices[index].innerText;
-      item.qty = 0
+      item.qty =1
       var check=false;
       arr.forEach(el1 => {
         if(el1.id==index){
@@ -27,17 +27,34 @@ buttons.forEach((el,index) => {
 function fetch(){
     if(arr.length>0){
         var str=``;
+        var i=1;
         arr.forEach((el,index)=>{
             str+=`
             <tr class="">
-            <td scope="row">`+(++index)+`</td>
+            <td scope="row">`+(i++)+`</td>
             <td>`+el.name+`</td>
-            <td>`+el.price+`</td>
+            <td>`+Intl.NumberFormat('en-US').format(el.price)+`</td>
             <td>`+el.qty+`</td>
-            <td>`+(el.qty*el.price)+`</td>
-            <td> <button class="btn btn-info btn-sm">Xóa</button></td>
+            <td>`+Intl.NumberFormat('en-US').format(el.qty*el.price)+`</td>
+            <td> <button class="btn btn-info btn-sm"onclick="deleteCart(`+index+`)">Xóa</button></td>
           </tr>`
         });
         document.getElementById('resultcart').innerHTML=str;
+    }else{
+        str=`
+        <tr class="">
+        <td colspan=6 scope="row">chua co gio hang</td>
+        </tr>
+        `;
+        document.getElementById('resultcart').innerHTML=str;
     }
+}
+function deleteCart(x){
+    if(arr.length>1){
+        arr=arr.filter(item => item.id!=x);
+    }else(
+        arr=[]
+    )
+    console.log(arr);
+    fetch()
 }
