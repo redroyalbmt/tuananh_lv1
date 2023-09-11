@@ -1,0 +1,25 @@
+.navbar1{
+    background-color: #515154 !important;
+}
+.logo{
+    height: 50px;
+    width: auto;
+}
+.nav-item{
+    height: 65px;
+}
+.nav-link{
+    padding-top: 30%;
+}
+.dropdown-toggle{
+    padding-top: 15%;
+}
+.nav-item .dropdown:last-child{
+    margin-top: 3px;
+}
+.d-flex{
+    padding-top: 10px;
+}
+.d-flex1{
+   margin-top: -6px;
+}
