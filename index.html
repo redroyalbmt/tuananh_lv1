@@ -14,6 +14,24 @@
     
 </head>
 <body>
+      <!-- modal -->
+      <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="LoginModalLabel">Modal đăng nhập</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="text" class="form-control" id="email"placeholder="Email dang nhap">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="submitloginbtn">Đăng Nhập</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <nav class="navbar navbar1 navbar-expand-sm navbar-dark bg-secondary">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,22 +51,16 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Thương Hiệu
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <ul class="dropdown-menu" id="brandsUL" aria-labelledby="navbarDropdown">
+                 
                 </ul>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Loại sản Phẩm
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <ul class="dropdown-menu" id="loaispUL" aria-labelledby="navbarDropdown">
+                  
                 </ul>
               </li>
             
@@ -58,32 +70,63 @@
               <button class="btn btn-outline-success" type="submit">Search</button>          
  
             </form>
-
+  <div class="d-flex1">
                 <button class="btn btn-warning ms-3 " type="button" id="loginbtn">Đăng Nhập</button> 
 
-            
+              </div>
 
           </div>
         </div>
     </nav>
-    <!-- modal -->
-    <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="LoginModalLabel">Modal đăng nhập</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="row">
+      <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="modal-body">
-          <input type="text" class="form-control" id="email"placeholder="Email dang nhap">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://shopdunk.com/images/uploaded/banner/thang%209%202023/banner%20iphone%2014%20Pro%20Max%20T9_Banner%20PC.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://shopdunk.com/images/uploaded/banner/thang%209%202023/banner%20ipad%20gen9%20T9_Banner%20PC.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://shopdunk.com/images/uploaded/banner/thang%209%202023/banner%20watch%20T9_Banner%20PC.jpg" class="d-block w-100" alt="...">
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="submitloginbtn">Đăng Nhập</button>
-        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
+<!-- hinh anh nho -->
+<div class="container mt-2">
+  <div class="row w-100 ">
+      <div class="row w-100">
+        <div class="col-md-4">
+          <img class="img-fluid w-100"src="https://shopdunk.com/images/uploaded/BONUSt7.png" alt="">
+        </div>
+        <div class="col-md-4">
+          <img class="img-fluid w-100"src="https://shopdunk.com/images/uploaded/Bonus%20banner-26.png" alt="">
+
+        </div>
+        <div class="col-md-4">
+          <img class="img-fluid w-100"src="https://shopdunk.com/images/uploaded/Bonus%20banner-16.png" alt="">
+
+        </div>
+      </div>
   </div>
+  <div class="row w-100" id="productfetch">
+
+  </div>
+</div>
   <script  src="js/home.js"></script>
 </body>
 </html>
