@@ -18,7 +18,7 @@ $('.addtocarbtn').click(function (e) {
        var name=$(this).attr('data-name');
        var price=Number($(this).attr('data-price'));
         var item=new Object;
-        item.iq=index;
+        item.id=index;
         item.name=name;
         item.price=price;
         item.qty=1;
