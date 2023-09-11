@@ -11,6 +11,7 @@ function addtocart(){
     
     }
 
+
 $('.addtocarbtn').click(function (e) { 
     e.preventDefault();
        var index=$(this).attr('data-id');
@@ -33,7 +34,10 @@ $('.addtocarbtn').click(function (e) {
           } 
           localStorage.setItem('cart',JSON.stringify(arr));
           render()
+          
 });
+         
+
 }
 function render(){
     var result=fetch();
@@ -44,11 +48,14 @@ function render(){
         </tr>
         `;
         $("#resultcart").html(str)
+        
 
     }else{
         $("#resultcart").html(result)
         deleteCart()
     }
+        
+    
 }
 function fetch(){
     if(localStorage.getItem('cart') && localStorage.getItem('cart')!=null){
@@ -64,12 +71,13 @@ function fetch(){
             <td>`+Intl.NumberFormat('en-US').format(el.price)+`</td>
             <td>`+el.qty+`</td>
             <td>`+Intl.NumberFormat('en-US').format(el.qty*el.price)+`</td>
-            <td> <button class="btn btn-info btn-sm deleteCartitem"data-id="`+index+`">Xóa</button></td>
+            <td> <button class="btn btn-info btn-sm deleteCartItem" data-id="`+index+`">Xóa</button></td>
           </tr>`
         });
         return str;
     }else{
         return false
+        
     }
 }
 function deleteCart(){
@@ -81,7 +89,7 @@ function deleteCart(){
     
     }
 
-   $('.deleteCartitem').click(function (e) { 
+   $('.deleteCartItem').click(function (e) { 
     e.preventDefault();
     var id=$(this).attr('data-id');
     var check=confirm("xoa san pham");
