@@ -1,3 +1,6 @@
+*{
+    font-family: 'Times New Roman', Times, serif;
+}
 .navbar1{
     background-color: #515154 !important;
 }
@@ -21,5 +24,12 @@
     padding-top: 10px;
 }
 .d-flex1{
-   margin-top: -6px;
+   margin-top: -8px;
+}
+.productinfo .card-title{
+    font-size: 18px;
+    font-weight: bold;
+}
+.productinfo .card-text{
+    font-size: 17px;
 }
