@@ -97,7 +97,7 @@ function getData(){
                       <img src="`+urlimage+el.images+`" class="card-img-top" alt="...">
                       <div class="card-body productinfo">
                         <h5 class="card-title">`+el.name+`</h5>
-                        <span class="card-text">Tên Sản Phẩm: `+el.name+`</span><br>
+                        <span class="card-text"> `+el.name+`</span><br>
                         <span class="card-text">Giá :`+Intl.NumberFormat('en-US').format(Number(el.price))+`</span><br>
                         <span class="card-text">Thương Hiệu :`+el.brandname+`</span><br><br>
                         <a href="#" class="btn btn-primary">Xem Thêm</a>
