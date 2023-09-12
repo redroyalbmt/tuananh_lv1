@@ -1,8 +1,10 @@
 $(document).ready(function () {
-    login();getData();
+    login();getData();loadData();showMore();
+  
 });
 const url= "https://students.trungthanhweb.com/api/";
 const urlimage= "https://students.trungthanhweb.com/images/";
+var link = url+'home';
 
 const Toast = Swal.mixin({
     toast: true,
@@ -58,6 +60,18 @@ function login(){
         });
     });
 }
+// function loadData(){
+//     $("#logoutbtn").hide();
+//     if(localStorage.getItem('token') && localStorage.getItem('token') !=null){
+//         $("#loginbtn").hide();
+//         $("#logoutbtn").show();
+//         $("#showmorebtn").click(function (e) { 
+//             e.preventDefault();
+//             showMore();
+            
+//         });
+//     }
+// }
 function getData(){
     
     $.ajax({
@@ -110,6 +124,68 @@ function getData(){
                 });
                 $("#productfetch").html(str);
             }
+        }
+    });
+}
+function showMore(){
+    $.ajax({
+        type: "GET",
+        url: link,
+        data: {
+            apitoken:localStorage.getItem('token'),
+        },
+        dataType: "JSON",
+        success: function (res) {
+            const brands=res.brands;
+            const categrories=res.categrories;
+            const products = res.products.data;
+            if(brands.length>0){
+                var str=``;
+                brands.forEach(el => {
+                    str +=`
+                    <li><a class="dropdown-item" href="brands.html?id=`+el.id+`">`+el.name+`</a></li>
+                    `
+                });
+                $("#brandUL").html(str);
+            }
+            if(categrories.length > 0){
+                var str =``;
+                categrories.forEach(el => {
+                    str +=`
+                    <li><a class="dropdown-item" href="categrories.html?id=`+el.id+`">`+el.name+`</a></li>
+                    `
+                });
+                $("#cateUL").html(str);
+            }
+            if(products.length >0){
+                var str=``;
+                products.forEach(el => {
+                    str+=`
+                    <div class="col-md-3">
+                    <div class="card" style="width: 100%;">
+                      <img class="productImage" src="https://students.trungthanhweb.com/images/"`+el['images']+`">
+                      <div class="card-body ">
+                      <a href="#">
+                        <h5 class="card-title">`+el.name+`</h5></a>
+                     
+                        <p class="card-text">Giá :`+Intl.NumberFormat('en-US').format(Number(el.price))+`</p>
+                        <p>Loai San pham:`+el.catename+`</p>
+                        <p>Thuong hieu:`+el.brandname+`</p>
+                        <a href="detail.html?id=`+el.id+`" class="btn btn-primary chitietBtn"data-id:"`+el.id+`">Chi Tiet</a>
+                        <button class="btn btn-success addtocartBtn" data-id=`+el.id+`>Them</button>
+                      </div>
+                    </div>
+                  </div> 
+                    `;
+                });
+                $("#resultProduct").append(str);
+                if(res.products.next_page_url !=null){
+                    link=res.products.next_page_url;
+                }else{
+                    $("#showmorebtn").hide();
+                }
+            }
+
         }
     });
 }
