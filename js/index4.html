@@ -52,7 +52,6 @@
       </div>
     </div>
   </div>
-</div>
 <!-- end edit modal -->
 <!-- navbar  -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -112,7 +111,7 @@
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 1700,
+    timer: 1200,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -126,6 +125,7 @@
     editTodo();
     deleteTodo();
     checklogout();
+   
   });
   // login
   function checklogin() {
@@ -135,8 +135,11 @@
       $("#email").hide();
       $("#api_token").val(localStorage.getItem("token"));
     }
-    $("#loginModal").modal("show");
-    $("#checkloginbtn").click(function (e) {
+    $("#loginbtn").click(function (e) { 
+      e.preventDefault();
+          $("#loginModal").modal("show");
+          $("#checkloginbtn").click(function (e) {
+      
       e.preventDefault();
       let email = $("#email").val().trim();
       if (email == "") {
@@ -181,9 +184,12 @@
         })
       }
     });
+  
+    });
   }
   // end login
   // logout
+
   function checklogout() {
 
     if (!localStorage.getItem("token") && localStorage.getItem("token") == null) {
@@ -193,11 +199,9 @@
     }
     $("#logoutbtn").click(function (e) {
       
-      e.preventDefault();
-      if (!localStorage.getItem("token") && localStorage.getItem("token") == null) {
+      e.preventDefault();;
+      if (!localStorage.removeItem("token") && localStorage.removeItem("token") == null) {
         localStorage.removeItem('token');
-
-
         Toast.fire({
           icon: 'success',
           title: 'Logout thành công',
@@ -208,6 +212,7 @@
       }
     });
   }
+
   // end logout
   // add todo
   function addtodo() {
