@@ -15,23 +15,44 @@
 </head>
 <body>
       <!-- modal -->
-      <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
+      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="LoginModalLabel">Modal đăng nhập</h5>
+              <h5 class="modal-title" id="loginModalLabel">Login Modal</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <input type="text" class="form-control" id="email"placeholder="Email dang nhap">
+              <input type="text" id="email" placeholder="Email" class="form-control mb-2">
+              <input type="text" id="api_token" placeholder="apitoken" class="form-control">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="submitloginbtn">Đăng Nhập</button>
+              <button type="button" class="btn btn-primary" id="checkloginbtn">Login</button>
+      
             </div>
           </div>
         </div>
       </div>
+      <!-- end modal -->
+      <!-- edit modal -->
+      <div class="modal fade" id="editTodoModal" tabindex="-1" aria-labelledby="editTodoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editTodoModalLabel">Thay đổi To Do</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="text" id="editTodoIpt" placeholder="" class="form-control mb-2">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+              <button type="button" class="btn btn-primary" id="submitedit">Lưu</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      <!-- end edit modal -->
     <nav class="navbar navbar1 navbar-expand-sm navbar-dark bg-secondary">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,8 +93,9 @@
             </form>
   <div class="d-flex1">
                 <button class="btn btn-warning ms-3 " type="button" id="loginbtn">Đăng Nhập</button> 
-
+                <button class="btn btn-warning ms-3 " type="button" id="logoutbtn">Đăng Xuất</button> 
               </div>
+              
 
           </div>
         </div>
@@ -123,13 +145,205 @@
         </div>
       </div>
   </div>
+  
   <div class="row w-100" id="productfetch">
-
+   
   </div>
+  
     <div class="row w-100 mt-3">
       <button style="margin: 10px auto;" class="btn btn-outline-success w-25" id="showmorebtn">Xem Thêm</button>
     </div>
+   
 </div>
-  <script  src="js/home.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      checklogin();loadData();showMore();checklogout();
+  
+});
+const CHECKLOGIN_API = "https://students.trungthanhweb.com/api/checkLoginhtml?email=leodomsolar@gmail.com";
+const url= "https://students.trungthanhweb.com/api/";
+const urlimage= "https://students.trungthanhweb.com/images/";
+var link = url+'home';
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1700,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    },
+  });
+  // login
+  function checklogin() {
+    if (!localStorage.getItem("token") && localStorage.getItem("token") == null) {
+      $("#api_token").hide();
+    } else {
+      $("#email").hide();
+      $("#api_token").val(localStorage.getItem("token"));
+    }
+    $("#loginbtn").click(function (e) { 
+      e.preventDefault();
+          $("#loginModal").modal("show");
+          $("#checkloginbtn").click(function (e) {
+      
+      e.preventDefault();
+      let email = $("#email").val().trim();
+      if (email == "") {
+
+        Toast.fire({
+          icon: 'error',
+          title: 'chưa nhập email',
+        });
+      } else {
+        $.ajax({
+          type: "POST",
+          url: CHECKLOGIN_API,
+          data: {
+            email: email
+          },
+          dataType: "JSON",
+          success: function (response) {
+            console.log(response);
+            if (response.check == true) {
+              if (!localStorage.getItem("token") && localStorage.getItem("token") == null) {
+                localStorage.setItem("token", response.apitoken);
+              }
+              // in thong bao dau ra
+
+              Toast.fire({
+                icon: 'success',
+                title: 'Đăng nhâp thành công',
+              }).then(() => {
+                window.location.reload();
+              });
+            }
+            // ket thuc in thong bao(
+            if (response.msg.email) {
+
+              Toast.fire({
+                icon: 'error',
+                title: response.msg.email,
+              });
+            }
+          }
+
+        })
+      }
+    });
+  
+    });
+  }
+  // end login
+  // logout
+  function checklogout() {
+
+if (!localStorage.getItem("token") && localStorage.getItem("token") == null) {
+  $("#logoutbtn").hide();
+  $("#showmorebtn").hide();
+} else {
+  $("#loginbtn").hide();
+}
+$("#logoutbtn").click(function (e) {
+  
+  e.preventDefault();;
+  if (!localStorage.removeItem("token") && localStorage.removeItem("token") == null) {
+    localStorage.removeItem('token');
+    Toast.fire({
+      icon: 'success',
+      title: 'Logout thành công',
+    }).then(() => {
+      window.location.reload();
+    });
+
+  }
+});
+}
+ 
+  // and logout
+  // load data
+//   
+  // end load data
+  // show more
+  function showMore(){
+    $.ajax({
+        type: "GET",
+        url: link,
+        data: {
+            apitoken:localStorage.getItem('token'),
+        },
+        dataType: "JSON",
+        success: function (res) {
+            const brands=res.brands;
+            const categrories=res.categrories;
+            const products = res.products.data;
+            if(brands.length>0){
+                var str=``;
+                brands.forEach(el => {
+                    str +=`
+                    <li><a class="dropdown-item" href="brands.html?id=`+el.id+`">`+el.name+`</a></li>
+                    `
+                });
+                $("#brandUL").html(str);
+            }
+            if(categrories.length > 0){
+                var str =``;
+                categrories.forEach(el => {
+                    str +=`
+                    <li><a class="dropdown-item" href="categrories.html?id=`+el.id+`">`+el.name+`</a></li>
+                    `
+                });
+                $("#cateUL").html(str);
+            }
+            if(products.length >0){
+                var str=``;
+                products.forEach(el => {
+                    str+=`
+                    <div class="col-md-3">
+                    <div class="card" style="width: 18rem;">
+                      <img src="`+urlimage+el.images+`" class="card-img-top" alt="...">
+                      <div class="card-body productinfo">
+                        <h5 class="card-title">`+el.name+`</h5>
+                        <span class="card-text"> `+el.name+`</span><br>
+                        <span class="card-text">Giá :`+Intl.NumberFormat('en-US').format(Number(el.price))+`</span><br>
+                        <span class="card-text">Thương Hiệu :`+el.brandname+`</span><br><br>
+                        <a href="ctsp.html?id=`+el.id+`" class="btn btn-primary">Xem Thêm</a>
+                        <a href="#" class="btn btn-warning ms-3" data-id=`+el.id+`>Đặt Hàng</a>
+                      </div>
+                    </div>
+                  </div>
+                    `;
+                });
+                $("#productfetch").append(str);
+                if(res.products.next_page_url !=null){
+                    link=res.products.next_page_url;
+                }else{
+                    $("#showmorebtn").hide();
+                }
+            }
+
+        }
+    });
+}
+// loaddata
+function loadData(){
+    $("#logoutbtn").hide();
+    if(localStorage.getItem('token') && localStorage.getItem('token') !=null){
+        $("#loginbtn").hide();
+        $("#logoutbtn").show();
+        $("#showmorebtn").click(function (e) { 
+            e.preventDefault();
+            showMore()
+            
+        });
+    }
+}
+// end show more
+// load data
+// end load data
+</script>
 </body>
 </html>
