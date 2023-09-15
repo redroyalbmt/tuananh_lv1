@@ -60,18 +60,18 @@ function login(){
         });
     });
 }
-// function loadData(){
-//     $("#logoutbtn").hide();
-//     if(localStorage.getItem('token') && localStorage.getItem('token') !=null){
-//         $("#loginbtn").hide();
-//         $("#logoutbtn").show();
-//         $("#showmorebtn").click(function (e) { 
-//             e.preventDefault();
-//             showMore();
+function loadData(){
+    $("#logoutbtn").hide();
+    if(localStorage.getItem('token') && localStorage.getItem('token') !=null){
+        $("#loginbtn").hide();
+        $("#logoutbtn").show();
+        $("#showmorebtn").click(function (e) { 
+            e.preventDefault();
+            showMore();
             
-//         });
-//     }
-// }
+        });
+    }
+}
 function getData(){
     
     $.ajax({
