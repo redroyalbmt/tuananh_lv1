@@ -1,11 +1,9 @@
 *{
     font-family: 'Times New Roman', Times, serif;
 }
-.container{
-    width: 100% !important;
-    /* margin-top: 0px; */
-    display: grid;
-    grid-template-columns: 30% 70%;
+.container1{
+    width: 97%;
+    margin: 10px auto;
 }
 *{
     font-family: 'Times New Roman', Times, serif;
@@ -35,10 +33,4 @@
 .d-flex1{
    margin-top: -8px;
 }
-.productinfo .card-title{
-    font-size: 18px;
-    font-weight: bold;
-}
-.productinfo .card-text{
-    font-size: 17px;
-}
+/* hihihi */
