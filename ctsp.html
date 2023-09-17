@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="css/stylectsp.css">
 <script src="js/alert.js"></script>
 <script src="js/code.jquery.com_jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="js/sweetalert2.js"></script>
+<script src="js/owl.carousel.js"></script>
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<script src="js/owl.carousel.min.js"></script>
 </head>
 </head>
 
@@ -65,8 +70,10 @@
                             <img class="logo" src="img/Capture.PNG">
                         </a>
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="#">Home</a>
+                        
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -82,20 +89,28 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Loại sản Phẩm
                         </a>
-                        <ul class="dropdown-menu" id="loaispUL" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu" id="cateUL" aria-labelledby="navbarDropdown">
 
                         </ul>
                     </li>
+                    <form class="d-flex">
+                        <i class="fa fa-shopping-cart" style="font-size:43px;; margin-left: 563px;color: #b1b1b1;"></i>
+                        </form>
 
                 </ul>
+               
                 <form class="d-flex">
+                    
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    \
                     <button class="btn btn-outline-success" type="submit">Search</button>
 
                 </form>
+                
                 <div class="d-flex1">
-                   <a href="index.html"><button class="btn btn-warning ms-3 " type="button" id="loginbtn">Đăng Nhập</button></a>
-                 <button class="btn btn-warning ms-3 " type="button"  id="logoutbtn">Đăng Xuất</button>
+                    
+                   <a href="index.html"><button class="btn btn-warning  "style="margin-left: 6px;" type="button" id="loginbtn">Đăng Nhập</button></a>
+                   <a href="index.html"><button class="btn btn-warning  " style="margin-left: 6px;" type="button"  id="logoutbtn">Đăng Xuất</button></a>
                 </div>
 
 
@@ -104,98 +119,93 @@
     </nav>
 
     <!-- end navbar -->
-    <div class="container">
-        <div class="col-md contentrow" id="content">
-
-        </div>
-        <div class="col-md ms-3">
-            <div class="table-responsive mt-4">
-                <table class="table table-primary">
-                    <tbody>
-                        <tr class="">
-                            <td scope="row">Tên Sản Phẩm</td>
-                            <td><span id="productname"></span></td>
-                        </tr>
-                        <tr class="">
-                            <td scope="row">Giảm Giá</td>
-                            <td><span id="discount"></span></td>
-                        </tr>
-                        <tr class="">
-                            <td scope="row">Giá</td>
-                            <td><span id="price"></span></td>
-                        </tr>
-                        <tr class="">
-                            <td scope="row">Loại Sản Phẩm</td>
-                            <td><span id="catename"></span></td>
-                        </tr>
-                        <tr class="">
-                            <td scope="row">Thương Hiệu</td>
-                            <td><span id="brandname"></span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="row mt-2">
-                <div class="col-md">
-                    <button class="btn btn-danger w-100">Trả Góp</button>
+    <div class="container1">
+        <div class="row w-100">
+            <div class="col-md-4" >
+                <div class="row" style="width:100%;margin: 0px auto;">
+                    <img id="productImage" src="https://students.trungthanhweb.com/images/" alt="">
                 </div>
-                <div class="col-md">
-                    <button class="btn btn-warning w-100">Thanh toán Qua Thẻ</button>
+                <div class="row" style="width: 80%;margin:0px auto">
+                    <div class="ms-3 col-md" id="owl">
+                        <div class="owl-carousel" id="carousel">
+                    </div>
+                    </div>
                 </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-md">
-                    <button class="btn btn-primary w-100" id="addtocartBtn">Thêm vào giỏ hàng</button>
-                </div>  
+            <div class="col-md ms-3">
+                <div class="table-respons`ive mt-4">
+                    <table class="table table-primary">
+                        <tbody>
+                            <tr class="">
+                                <td scope="row">Tên sản phẩm</td>
+                                <td><span id="productname"></span></td>
+                            </tr>
+                            <tr class="">
+                                <td scope="row">Giảm giá</td>
+                                <td><span id="discount"></span></td>
+                            </tr>
+                            <tr class="">
+                                <td scope="row">Giá</td>
+                                <td><span id="price"></span></td>
+                            </tr>
+                            <tr class="">
+                                <td scope="row">Loại sản phẩm</td>
+                                <td><span id="catename"></span></td>
+                            </tr>
+                            <tr class="">
+                                <td scope="row">Thương hiệu</td>
+                                <td><span id="brandname"></span></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-md">
+                        <button class="btn btn-outline-danger w-100" >Trả góp</button>
+                    </div>
+                    <div class="col-md">
+                        <button class="btn btn-outline-warning w-100" >Thanh toán qua thẻ</button>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md">
+                        <button class="btn btn-primary w-100" id="addTocartBtn" >Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
-      <script>
-         $(document).ready(function () {
-            checklogout(); 
+        
+        <div class="row detailrow" >
+            <div class="col-md contentrow" id="content">
+                
+            </div>
 
-            });
-            
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 1700,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    },
-  });
-            // logout
-            function checklogout() {
+        </div>
+        <div class="row w-100">
+            <button id="xemThem" class="btn btn-outline-primary">Xem thêm</button>
+        </div>
+        <div class="pcowl">
+            <div class="row w-60 brandrow">
+                <h3 >Sản phẩm cùng thương hiệu</h3>
+                <div class="row owl-carousel " id="sameBrandProduct">
 
-if (!localStorage.getItem("token") && localStorage.getItem("token") == null) {
-  $("#logoutbtn").hide();
-  $("#showmorebtn").hide();
-} else {
-  $("#loginbtn").hide();
-}
-$("#logoutbtn").click(function (e) {
-  
-  e.preventDefault();;
-  if (!localStorage.removeItem("token") && localStorage.removeItem("token") == null) {
-    localStorage.removeItem('token');
-    Toast.fire({
-      icon: 'success',
-      title: 'Logout thành công',
-    }).then(() => {
-      window.location.reload();
-    });
+                </div>
+                <hr>
+        </div>
+        <div class="row caterow">
+            <h3>Sản phẩm cùng loại</h3>
+            <div class="row owl-carousel" id="sameCateProduct">
+            </div>
+        </div>
+        </div>
+       <div class="mobieowl">
 
-  }
-});
-}
-// end logout
-// 
-// login
-
-      </script>
+       </div>
+        
+    </div>
+<script src="js/ctsp.js"></script>
 </body>
 
 </html>
