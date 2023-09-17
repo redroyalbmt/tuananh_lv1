@@ -8,10 +8,8 @@
     <link rel="stylesheet" href="css/style1.css">
 <script src="js/alert.js"></script>
 <script src="js/code.jquery.com_jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
-   
-    
 </head>
 <body>
       <!-- modal -->
@@ -84,7 +82,9 @@
                   
                 </ul>
               </li>
-            
+              <form class="d-flex">
+                <a href="cart.html"><i class="fa fa-shopping-cart" style="font-size:43px;; margin-left: 550px;color: #b1b1b1;"></i></a>
+                </form>
             </ul>
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -287,7 +287,7 @@ $("#logoutbtn").click(function (e) {
                     <li><a class="dropdown-item" href="brands.html?id=`+el.id+`">`+el.name+`</a></li>
                     `
                 });
-                $("#brandUL").html(str);
+                $("#brandsUL").html(str);
             }
             if(categrories.length > 0){
                 var str =``;
@@ -296,13 +296,13 @@ $("#logoutbtn").click(function (e) {
                     <li><a class="dropdown-item" href="categrories.html?id=`+el.id+`">`+el.name+`</a></li>
                     `
                 });
-                $("#cateUL").html(str);
+                $("#loaispUL").html(str);
             }
             if(products.length >0){
                 var str=``;
                 products.forEach(el => {
                     str+=`
-                    <div class="col-md-3 mt-2 style="border-radius: 50px 20px;"">
+                    <div class="col-md-3 mt-2 style="border-radius: 50px 20px;;"">
                     <div class="card" style="width: 18rem;">
                       <img src="`+urlimage+el.images+`" class="card-img-top" alt="...">
                       <div class="card-body productinfo">
@@ -310,7 +310,7 @@ $("#logoutbtn").click(function (e) {
                         <span class="card-text"> `+el.name+`</span><br>
                         <span class="card-text">Giá :`+Intl.NumberFormat('en-US').format(Number(el.price))+`</span><br>
                         <span class="card-text">Thương Hiệu :`+el.brandname+`</span><br><br>
-                        <a href="ctsp.html?id=`+el.id+`" class="btn btn-primary">Xem Thêm</a>
+                        <a href="ctsp.html?id=`+el.id+`" class="btn btn-primary">Chi Tiết </a>
                         <a href="#" class="btn btn-warning ms-3" data-id=`+el.id+`>Đặt Hàng</a>
                       </div>
                     </div>
