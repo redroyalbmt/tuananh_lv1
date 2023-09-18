@@ -72,7 +72,7 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="index.html">Home</a>
                         
                     </li>
                     <li class="nav-item dropdown">
@@ -86,16 +86,18 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                            data-bs-toggle="dropdown" aria-expanded="false" style="
+                            margin-top: -2px;
+                        ">
                             Loại sản Phẩm
                         </a>
                         <ul class="dropdown-menu" id="cateUL" aria-labelledby="navbarDropdown">
 
                         </ul>
                     </li>
-                    <form class="d-flex">
-                        <i class="fa fa-shopping-cart" style="font-size:43px;; margin-left: 563px;color: #b1b1b1;"></i>
-                        </form>
+                <form class="d-flex">
+                        <a href="cart.html"><i class="fa fa-shopping-cart" style="font-size:43px;; margin-left: 563px;color: #b1b1b1;"></i></a>
+                </form>
 
                 </ul>
                
@@ -171,7 +173,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md">
-                        <button class="btn btn-primary w-100" id="addTocartBtn" >Thêm vào giỏ hàng</button>
+                    <button class="btn btn-primary w-100" id="addTocartBtn" >Thêm vào giỏ hàng</button>
                     </div>
                 </div>
             </div>
@@ -205,7 +207,26 @@
        </div>
         
     </div>
+    <!-- //footer -->
+<footer className="w-100 py-4 flex-shrink-0">
+    <div class="w-100 bg-dark text-light p-3">
+        <div class="row">
+            <div class="col-md">
+                <div class="row">
+                    <h4 class="text-light text-center" style="padding-top: 10%;">Lê Tuấn Anh</h4>
+                </div>
+            </div>
+            <div class="col-md-3">
+  
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7397.368957785469!2d106.81364439886346!3d10.840379293177014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1691399952027!5m2!1svi!2s"
+                    width="100%" height="260px" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
 <script src="js/ctsp.js"></script>
+
 </body>
 
 </html>
