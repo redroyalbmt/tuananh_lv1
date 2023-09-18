@@ -64,7 +64,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="index.html">Home</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -75,7 +75,9 @@
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="
+                margin-top: -2px;
+            ">
                   Loại sản Phẩm
                 </a>
                 <ul class="dropdown-menu" id="loaispUL" aria-labelledby="navbarDropdown">
@@ -155,7 +157,25 @@
     </div>
    
 </div>
+<!-- //footer -->
+<footer className="w-100 py-4 flex-shrink-0">
+  <div class="w-100 bg-dark text-light p-3">
+      <div class="row">
+          <div class="col-md">
+              <div class="row">
+                  <h4 class="text-light text-center" style="padding-top: 10%;">Lê Tuấn Anh</h4>
+              </div>
+          </div>
+          <div class="col-md-3">
 
+              <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7397.368957785469!2d106.81364439886346!3d10.840379293177014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1691399952027!5m2!1svi!2s"
+                  width="100%" height="260px" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+      </div>
+  </div>
+</footer>
   <script>
     $(document).ready(function () {
       checklogin();loadData();showMore();checklogout();
@@ -307,11 +327,11 @@ $("#logoutbtn").click(function (e) {
                       <img src="`+urlimage+el.images+`" class="card-img-top" alt="...">
                       <div class="card-body productinfo">
                         <h5 class="card-title">`+el.name+`</h5>
-                        <span class="card-text"> `+el.name+`</span><br>
+                        <span class="card-text" > `+el.name+`</span><br>
                         <span class="card-text">Giá :`+Intl.NumberFormat('en-US').format(Number(el.price))+`</span><br>
                         <span class="card-text">Thương Hiệu :`+el.brandname+`</span><br><br>
                         <a href="ctsp.html?id=`+el.id+`" class="btn btn-primary">Chi Tiết </a>
-                        <a href="#" class="btn btn-warning ms-3" data-id=`+el.id+`>Đặt Hàng</a>
+                        <a href="#" class="btn btn-warning ms-3 " data-id=`+el.id+`>Đặt Hàng</a>
                       </div>
                     </div>
                   </div>
@@ -341,6 +361,8 @@ function loadData(){
         });
     }
 }
+
+
 // end show more
 // load data
 // end load data
