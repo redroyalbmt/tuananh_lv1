@@ -31,19 +31,21 @@
       </div>
       <!-- end modal -->
       <!-- edit modal -->
-      <div class="modal fade" id="editTodoModal" tabindex="-1" aria-labelledby="editTodoModalLabel" aria-hidden="true">
+      <div class="modal fade" id="ThanhToanModal" tabindex="-1" aria-labelledby="ThanhToanModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="editTodoModalLabel">Thay đổi To Do</h5>
+              <h5 class="modal-title" id="ThanhToanModalLabel">Thông Tin Thanh Toán</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <input type="text" id="editTodoIpt" placeholder="" class="form-control mb-2">
+              <input type="text" class="form-control w-100 mb-2" id="tenKH" placeholder="Tên khách hàng ">
+              <input type="text" class="form-control w-100 mb-2" id="phone" placeholder="Số điện thoại ">
+              <input type="text" class="form-control w-100 mb-2" id="address" placeholder="Địa chỉ ">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-              <button type="button" class="btn btn-primary" id="submitedit">Lưu</button>
+              <button type="button" class="btn btn-primary" id="submitCheckOut">Thanh Toán</button>
                 </div>
             </div>
           </div>
@@ -62,10 +64,10 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="index.html">Home</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Thương Hiệu
                 </a>
                 <ul class="dropdown-menu" id="brandsUL" aria-labelledby="navbarDropdown">
@@ -73,7 +75,9 @@
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="
+                margin-top: -2px;
+            ">
                   Loại sản Phẩm
                 </a>
                 <ul class="dropdown-menu" id="loaispUL" aria-labelledby="navbarDropdown">
@@ -81,7 +85,7 @@
                 </ul>
               </li>
               <form class="d-flex">
-                <i class="fa fa-shopping-cart" style="font-size:43px;; margin-left: 581px;color: #b1b1b1;"></i>
+                <i class="fa fa-shopping-cart" style="font-size:43px;; margin-left: 566px;color: #b1b1b1;"></i>
                 </form>
             </ul>
             <form class="d-flex">
@@ -100,10 +104,11 @@
     </nav>
     <div class="container mt-4">
         <div class="table-responsive desktopcart">
-            <table class="table ">
+                                <table class="table table-primary">
+
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">STT</th>
                         <th scope="col">Hình ảnh</th>
                         <th scope="col">Tên</th>
                         <th scope="col">Giá</th>
@@ -131,397 +136,363 @@
 
     </div>
     <script>
-        $(document).ready(function () {
-            login(); logout(); loadCart();
-            CheckOut();
-        });
-        const url = 'https://students.trungthanhweb.com/api/';
-        // ===========Global Constant=============
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1700,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-        function CheckOut() {
-            $("#checkoutBtn").click(function (e) {
-                e.preventDefault();
-                $("#ThanhToanModal").modal('show');
-                const format = /(0[3|5|7|8|9])+([0-9]{8})\b/g
-                $("#submitCheckOut").click(function (e) {
-                    e.preventDefault();
-                    var tenKH = $("#tenKH").val().trim();
-                    var phone = $("#phone").val().trim();
-                    var address = $("#address").val().trim();
-                    if (tenKH == '') {
-                        Toast.fire({
-                            icon: 'warning',
-                            title: 'Tên bé là gì ??'
-                        })
-                    } else if (phone == '') {
-                        Toast.fire({
-                            icon: 'warning',
-                            title: 'Cho xin sdt nhé'
-                        })
-                    } else if (address == '') {
-                        Toast.fire({
-                            icon: 'warning',
-                            title: 'Địa chỉ ở đâu ?'
-                        })
-                    } else if (!phone.match(format)) {
-                        Toast.fire({
-                            icon: 'warning',
-                            title: 'Số ma !!!'
-                        })
-                    } else {
-                        $("#submitCheckOut").attr('disabled', 'disabled');
-                        var cart = JSON.parse(localStorage.getItem('cart'));
-                        $.ajax({
-                            type: "post",
-                            url: url + "createBill",
-                            data: {
-                                tenKH: tenKH,
-                                phone: phone,
-                                address: address,
-                                cart: cart,
-                                apitoken: localStorage.getItem('token')
-                            },
-                            dataType: "JSON",
-                            success: function (res) {
-                                if (res.check == true) {
-                                    Toast.fire({
-                                        icon: 'warning',
-                                        title: 'Đặt hàng thành công'
-                                    }).then(() => {
-                                        localStorage.removeItem('cart');
-                                        window.location.replace('index.html');
-                                    })
-                                }
-                            }
-                        });
-                    }
-                });
-            });
-        }
-        function logout() {
-            $("#logoutbtn").click(function (e) {
-                e.preventDefault();
-                if (localStorage.getItem('token')) {
-                    localStorage.removeItem('token');
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Bye bye !'
-                    }).then(() => {
-                        window.location.reload();
-                    })
-                }
-            });
-        }
-        //   ===============================
-        function login() {
-            $("#loginBtn").click(function (e) {
-                e.preventDefault();
-                $("#LoginModal").modal('show');
-                $("#submitloginBtn").click(function (e) {
-                    e.preventDefault();
-                    var email = $("#email").val().trim();
-                    if (email == '') {
-                        Toast.fire({
-                            icon: 'error',
-                            title: 'Thiếu  email'
-                        })
-                    } else {
-                        $.ajax({
-                            type: "post",
-                            url: "https://students.trungthanhweb.com/api/checkLoginhtml",
-                            data: {
-                                // Name : Giá trị 
-                                email: email
-                            },
-                            dataType: "JSON",
-                            success: function (res) {
-                                if (res.check == true) {
-                                    console.log(res.apitoken);
-                                    localStorage.setItem('token', res.apitoken);
-                                    Toast.fire({
-                                        icon: 'success',
-                                        title: 'Đăng nhập thành công'
-                                    }).then(() => {
-                                        window.location.reload();
-                                    })
+      $(document).ready(function () {
+           logout(); loadCart();
+          CheckOut();
+      });
+      const url = 'https://students.trungthanhweb.com/api/';
+      // ===========Global Constant=============
+      const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1700,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+      })
+      function CheckOut() {
+          $("#checkoutBtn").click(function (e) {
+              e.preventDefault();
+              $("#ThanhToanModal").modal('show');
+              const format = /(0[3|5|7|8|9])+([0-9]{8})\b/g
+              $("#submitCheckOut").click(function (e) {
+                  e.preventDefault();
+                  var tenKH = $("#tenKH").val().trim();
+                  var phone = $("#phone").val().trim();
+                  var address = $("#address").val().trim();
+                  if (tenKH == '') {
+                      Toast.fire({
+                          icon: 'warning',
+                          title: 'Thiếu Tên Nhé??'
+                      })
+                  } else if (phone == '') {
+                      Toast.fire({
+                          icon: 'warning',
+                          title: 'Thiếu STD Nhé'
+                      })
+                  } else if (address == '') {
+                      Toast.fire({
+                          icon: 'warning',
+                          title: 'Quên Địa Chỉ Kìa ?'
+                      })
+                  } else if (!phone.match(format)) {
+                      Toast.fire({
+                          icon: 'warning',
+                          title: 'Số Không Có !!!'
+                      })
+                  } else {
+                      $("#submitCheckOut").attr('disabled', 'disabled');
+                      var cart = JSON.parse(localStorage.getItem('cart'));
+                      $.ajax({
+                          type: "post",
+                          url: url + "createBill",
+                          data: {
+                              tenKH: tenKH,
+                              phone: phone,
+                              address: address,
+                              cart: cart,
+                              apitoken: localStorage.getItem('token')
+                          },
+                          dataType: "JSON",
+                          success: function (res) {
+                              if (res.check == true) {
+                                  Toast.fire({
+                                      icon: 'warning',
+                                      title: 'Đặt hàng thành công'
+                                  }).then(() => {
+                                      localStorage.removeItem('cart');
+                                      window.location.replace('index.html');
+                                  })
+                              }
+                          }
+                      });
+                  }
+              });
+          });
+      }
+      ////logout
+      function logout() {
 
-                                } else {
-                                    if (res.msg.email) {
-                                        Toast.fire({
-                                            icon: 'error',
-                                            title: res.msg.email
-                                        })
-                                    }
-                                }
-                            }
-                        });
-                    }
-                });
-            });
-        }
-        var link = url + 'home'; //string 
-        // ================================
-        function loadCart() {
-            if (localStorage.getItem('cart') && localStorage.getItem('cart') != null) {
-                var cart = localStorage.getItem('cart');
-                var id = JSON.parse(cart);
-                $.ajax({
-                    type: "GET",
-                    url: url + "getCart",
-                    data: {
-                        apitoken: localStorage.getItem('token'),
-                        id: id
-                    },
-                    dataType: "JSON",
-                    success: function (res) {
-                        if (res.check == true) {
-                            const brands = res.brands;
-                            const categrories = res.categrories;
-                            if (brands.length > 0) {
-                                var str = ``;
-                                brands.forEach(el => {
-                                    str += `
-                                <li><a class="dropdown-item" href="#">`+ el.name + `</a></li>
-                                `
-                                });
-                                $("#brandUl").html(str);
-                            }
-                            if (categrories.length > 0) {
-                                var str = ``;
-                                categrories.forEach(el => {
-                                    str += `
-                                <li><a class="dropdown-item" href="categrories.html?id=`+ el.id + `">` + el.name + `</a></li>
-                                `
-                                });
-                                $("#cateUl").html(str);
-                            }
-                            if (res.result.length > 0) {
-                                var str = ``;
-                                var str2 = ``;
-                                var sum = 0;
-                                var i=0;
-                                res.result.forEach((el, index) => {
-                                    if (index % 2 == 0) {
-                                        str += `
-                                <tr class="table-primary">
-                                    <td class="table-borderless" scope="row">`+ (++index) + `</td>
-                                    <td class="table-borderless"><img src="`+ el[3] + `" style="width:150px;height: auto;" alt=""></td>
-                                    <td class="table-borderless">`+ el[1] + `</td>
-                                    <td class="table-borderless">`+ Intl.NumberFormat('en-US').format(el[2]) + `</td>
-                                    <td  class="table-borderless"> <input type="number" class="form-control qtyinput" value="`+ el[4] + `" data-id="` + el[0] + `" ></td>
-                                    <td class="table-borderless">`+ Intl.NumberFormat('en-US').format(el[6]) + `</td>
-                                    <td>
-                                        <button class="btn-sm btn-danger deleteCartItem" data-id="`+ Number(el[0]) + `">Xóa </button>
-                                    </td>
-                                    <
-                                </tr>
-                                `;
-                                        str2 += `
-                                        <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-heading`+(i)+`">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse`+(i)+`" aria-expanded="false" aria-controls="flush-collapse`+(i)+`">
-                                        <h4>`+ el[1] + `</h4>
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapse`+(i)+`" class="accordion-collapse collapse" aria-labelledby="flush-heading`+(i)+`" data-bs-parent="#accordionFlushCart">
-                                        <div class="accordion-body">
-                                            <img src="`+ el[3] + `" alt="" class="w-50">
-                                            <h4>Tên sản phẩm : `+ el[1] + `</h4>
-                                            <h4>Giá : `+ Intl.NumberFormat('en-US').format(el[5]) + `</h4>
-                                            <div class="mb-3">
-                                            <label for="" class="form-label">Số lượng</label>
-                                            <input type="number" class="form-control qtyinput" value="`+ el[4] + `" data-id="` + el[0] + `" >
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">Thành tiền</label>
-                                                <input type="text" readonly name="" id=""  value="`+Intl.NumberFormat('en-US').format(el[6])+`" class="form-control">
-                                            </div>
-                                        </div>
-                                </div>
-                                </div>
-                                `
-                                    } else {
-                                        str += `
-                                <tr class="table-secondary">
-                                    <td class="table-borderless" scope="row">`+ (++index) + `</td>
-                                    <td class="table-borderless"><img src="`+ el[3] + `" style="width:150px;height: auto;" alt=""></td>
-                                    <td class="table-borderless">`+ el[1] + `</td>
-                                    <td class="table-borderless">`+ Intl.NumberFormat('en-US').format(el[2]) + `</td>
-                                    <td  class="table-borderless"> <input type="number" class="form-control qtyinput" value="`+ el[4] + `" data-id="` + el[0] + `" ></td>
-                                    <td class="table-borderless">`+ Intl.NumberFormat('en-US').format(el[6]) + `</td>
-                                    <td>
-                                        <button class="btn-sm btn-danger deleteCartItem" data-id="`+ Number(el[0]) + `">Xóa </button>
-                                    </td>   
-                                </tr>
-                                `;
-                                str2 += `
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-heading`+(i)+`">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse`+(i)+`" aria-expanded="false" aria-controls="flush-collapse`+(i)+`">
-                                        <h4>`+ el[1] + `</h4>
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapse`+(i)+`" class="accordion-collapse collapse" aria-labelledby="flush-heading`+(i)+`" data-bs-parent="#accordionFlushCart">
-                                        <div class="accordion-body">
-                                            <img src="`+ el[3] + `" alt="" class="w-50">
-                                            <h4>Tên sản phẩm : `+ el[1] + `</h4>
-                                            <h4>Giá : `+ Intl.NumberFormat('en-US').format(el[5]) + `</h4>
-                                            <div class="mb-3">
-                                            <label for="" class="form-label">Số lượng</label>
-                                            <input type="number" class="form-control qtyinput" value="`+ el[4] + `" data-id="` + el[0] + `" >
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">Thành tiền</label>
-                                                <input type="text" readonly name="" id=""  value="`+Intl.NumberFormat('en-US').format(el[6])+`" class="form-control">
-                                            </div>
-                                        </div>
-                                </div>
-                                </div>
-                                `
-                                console.log();
-                                    }
+if (!localStorage.getItem("token") && localStorage.getItem("token") == null) {
+  $("#logoutbtn").hide();
+  $("#showmorebtn").hide();
+} else {
+  $("#loginbtn").hide();
+}
+$("#logoutbtn").click(function (e) {
+  
+  e.preventDefault();;
+  if (!localStorage.removeItem("token") && localStorage.removeItem("token") == null) {
+    localStorage.removeItem('token');
+    Toast.fire({
+      icon: 'success',
+      title: 'Tạm Biệt',
+    }).then(() => {
+        window.location.assign("index.html");
+    });
 
-                                    sum += el[6];
-                                    i++;
-                                });
-                                str += `
-                            <tr class="table-dark">
-                                <td colspan='5' class="table-borderless" scope="row">Tổng tiền</td>
-                                <td class="table-borderless">`+ Intl.NumberFormat('en-US').format(sum) + `</td>
-                                <td class="table-borderless" scope="row"></td>
+  }
+});
+}
+      //   ===============================
+     
+      var link = url + 'home'; //string 
+      // ================================
+      function loadCart() {
+          if (localStorage.getItem('cart') && localStorage.getItem('cart') != null) {
+              var cart = localStorage.getItem('cart');
+              
+              $.ajax({
+                  type: "GET",
+                  url: url + "getCart",
+                  data: {
+                      apitoken: localStorage.getItem('token'),
+                      id: cart,
+                  },
+                  dataType: "JSON",
+                  success: function (res) {
+                      if (res.check == true) {
+                          const brands = res.brands;
+                          const categrories = res.categrories;
+                          if (brands.length > 0) {
+                              var str = ``;
+                              brands.forEach(el => {
+                                  str += `
+                              <li><a class="dropdown-item" href="#">`+ el.name + `</a></li>
+                              `
+                              });
+                              $("#brandsUL").html(str);
+                          }
+                          if (categrories.length > 0) {
+                              var str = ``;
+                              categrories.forEach(el => {
+                                  str += `
+                              <li><a class="dropdown-item" href="categrories.html?id=`+ el.id + `">` + el.name + `</a></li>
+                              `
+                              });
+                              $("#loaispUL").html(str);
+                          }
+                          if (res.result.length > 0) {
+                              var str = ``;
+                              var str2 = ``;
+                              var sum = 0;
+                              var i=0;
+                              res.result.forEach((el, index) => {
+                                  if (index % 2 == 0) {
+                                      str += `
+                              <tr class="table-primary">
+                                  <td class="table-borderless" scope="row">`+ (++index) + `</td>
+                                  <td class="table-borderless"><img src="`+ el[3] + `" style="width:150px;height: auto;" alt=""></td>
+                                  <td class="table-borderless">`+ el[1] + `</td>
+                                  <td class="table-borderless">`+ Intl.NumberFormat('en-US').format(el[2]) + `</td>
+                                  <td  class="table-borderless"> <input type="number" class="form-control qtyinput" value="`+ el[4] + `" data-id="` + el[0] + `" ></td>
+                                  <td class="table-borderless">`+ Intl.NumberFormat('en-US').format(el[6]) + `</td>
+                                  <td>
+                                      <button class="btn-sm btn-danger deleteCartItem" data-id="`+ Number(el[0]) + `">Xóa </button>
+                                  </td>
+                                  <
+                              </tr>
+                              `;
+                                      str2 += `
+                                      <div class="accordion-item">
+                                  <h2 class="accordion-header" id="flush-heading`+(i)+`">
+                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse`+(i)+`" aria-expanded="false" aria-controls="flush-collapse`+(i)+`">
+                                      <h4>`+ el[1] + `</h4>
+                                      </button>
+                                  </h2>
+                                  <div id="flush-collapse`+(i)+`" class="accordion-collapse collapse" aria-labelledby="flush-heading`+(i)+`" data-bs-parent="#accordionFlushCart">
+                                      <div class="accordion-body">
+                                          <img src="`+ el[3] + `" alt="" class="w-50">
+                                          <h4>Tên sản phẩm : `+ el[1] + `</h4>
+                                          <h4>Giá : `+ Intl.NumberFormat('en-US').format(el[5]) + `</h4>
+                                          <div class="mb-3">
+                                          <label for="" class="form-label">Số lượng</label>
+                                          <input type="number" class="form-control qtyinput" value="`+ el[4] + `" data-id="` + el[0] + `" >
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="" class="form-label">Thành tiền</label>
+                                              <input type="text" readonly name="" id=""  value="`+Intl.NumberFormat('en-US').format(el[6])+`" class="form-control">
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>
+                              `
+                                  } else {
+                                      str += `
+                              <tr class="table-secondary">
+                                  <td class="table-borderless" scope="row">`+ (++index) + `</td>
+                                  <td class="table-borderless"><img src="`+ el[3] + `" style="width:150px;height: auto;" alt=""></td>
+                                  <td class="table-borderless">`+ el[1] + `</td>
+                                  <td class="table-borderless">`+ Intl.NumberFormat('en-US').format(el[2]) + `</td>
+                                  <td  class="table-borderless"> <input type="number" class="form-control qtyinput" value="`+ el[4] + `" data-id="` + el[0] + `" ></td>
+                                  <td class="table-borderless">`+ Intl.NumberFormat('en-US').format(el[6]) + `</td>
+                                  <td>
+                                      <button class="btn-sm btn-danger deleteCartItem" data-id="`+ Number(el[0]) + `">Xóa </button>
+                                  </td>   
+                              </tr>
+                              `;
+                              str2 += `
+                              <div class="accordion-item">
+                                  <h2 class="accordion-header" id="flush-heading`+(i)+`">
+                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse`+(i)+`" aria-expanded="false" aria-controls="flush-collapse`+(i)+`">
+                                      <h4>`+ el[1] + `</h4>
+                                      </button>
+                                  </h2>
+                                  <div id="flush-collapse`+(i)+`" class="accordion-collapse collapse" aria-labelledby="flush-heading`+(i)+`" data-bs-parent="#accordionFlushCart">
+                                      <div class="accordion-body">
+                                          <img src="`+ el[3] + `" alt="" class="w-50">
+                                          <h4>Tên sản phẩm : `+ el[1] + `</h4>
+                                          <h4>Giá : `+ Intl.NumberFormat('en-US').format(el[5]) + `</h4>
+                                          <div class="mb-3">
+                                          <label for="" class="form-label">Số lượng</label>
+                                          <input type="number" class="form-control qtyinput" value="`+ el[4] + `" data-id="` + el[0] + `" >
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="" class="form-label">Thành tiền</label>
+                                              <input type="text" readonly name="" id=""  value="`+Intl.NumberFormat('en-US').format(el[6])+`" class="form-control">
+                                          </div>
+                                      </div>
+                              </div>
+                              </div>
+                              `
+                              console.log();
+                                  }
 
-                            </tr>
-                            `
-                                str2+=`
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Tổng tiền</label>
-                                    <input type="text" name="" id="" readonly class="form-control" value="`+ Intl.NumberFormat('en-US').format(sum) + `" placeholder="" aria-describedby="helpId">
-                                </div>
-                                `;
-                                $("#cartressult").html(str);
-                                $("#accordionFlushCart").html(str2);
+                                  sum += el[6];
+                                  i++;
+                              });
+                              str += `
+                          <tr class="table-dark">
+                              <td colspan='5' class="table-borderless" scope="row">Tổng tiền</td>
+                              <td class="table-borderless">`+ Intl.NumberFormat('en-US').format(sum) + `</td>
+                              <td class="table-borderless" scope="row"></td>
 
-                            }
-                            editQuantity();
-                            deleteCart();
-                        } else {
-                            str = `
-                        <tr class="table-dark">
-                            <td colspan='7' class="table-borderless" scope="row">Chưa có sản phẩm</td>
-                        </tr>
-                        `;
-                            $("#cartressult").html(str);
+                          </tr>
+                          `
+                              str2+=`
+                              <div class="mb-3">
+                                  <label for="" class="form-label">Tổng tiền</label>
+                                  <input type="text" name="" id="" readonly class="form-control" value="`+ Intl.NumberFormat('en-US').format(sum) + `" placeholder="" aria-describedby="helpId">
+                              </div>
+                              `;
+                              $("#cartressult").html(str);
+                              $("#accordionFlushCart").html(str2);
 
-                        }
-                    }
-                });
-            } else {
-                window.location.replace('index.html?err=emtycart');
-            }
-        }
-        function deleteCart() {
-            $(".deleteCartItem").click(function (e) {
-                e.preventDefault();
-                Swal.fire({
-                    icon: 'question',
-                    text: 'Xóa sản phẩm khỏi giỏ hàng?',
-                    showDenyButton: true,
-                    showCancelButton: false,
-                    confirmButtonText: 'Xóa',
-                    denyButtonText: `Không`,
-                }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        var id = $(this).attr('data-id');
-                        var arr = [];
-                        console.log(id);
-                        var cart = JSON.parse(localStorage.getItem('cart'));
-                        cart.forEach(el => {
-                            if (el[0] != id) {
-                                arr.push(el);
-                            }
-                        });
-                        if (arr.length == 0) {
-                            localStorage.removeItem('cart');
-                        } else {
-                            localStorage.setItem('cart', JSON.stringify(arr));
-                        }
-                        Toast.fire({
-                            icon: 'success',
-                            title: 'Đã xóa khỏi giỏ hàng'
-                        }).then(() => {
-                            loadCart();
-                        })
-                    } else if (result.isDenied) {
+                          }
+                          editQuantity();
+                          deleteCart();
+                      } else {
+                          str = `
+                      <tr class="table-dark">
+                          <td colspan='7' class="table-borderless" scope="row">Chưa có sản phẩm</td>
+                      </tr>
+                      `;
+                          $("#cartressult").html(str);
 
-                    }
-                })
+                      }
+                  }
+              });
+          } else {
+              window.location.replace('index.html?err=emtycart');
+          }
+      }
+      function deleteCart() {
+          $(".deleteCartItem").click(function (e) {
+              e.preventDefault();
+              Swal.fire({
+                  icon: 'question',
+                  text: 'Xóa sản phẩm khỏi giỏ hàng?',
+                  showDenyButton: true,
+                  showCancelButton: false,
+                  confirmButtonText: 'Xóa',
+                  denyButtonText: `Không`,
+              }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                      var id = $(this).attr('data-id');
+                      var arr = [];
+                      console.log(id);
+                      var cart = JSON.parse(localStorage.getItem('cart'));
+                      cart.forEach(el => {
+                          if (el[0] != id) {
+                              arr.push(el);
+                          }
+                      });
+                      if (arr.length == 0) {
+                          localStorage.removeItem('cart');
+                      } else {
+                          localStorage.setItem('cart', JSON.stringify(arr));
+                      }
+                      Toast.fire({
+                          icon: 'success',
+                          title: 'Đã xóa khỏi giỏ hàng'
+                      }).then(() => {
+                          loadCart();
+                      })
+                  } else if (result.isDenied) {
 
-            });
-        }
-        function editQuantity() {
-            $(".qtyinput").change(function (e) {
-                e.preventDefault();
-                var id = $(this).attr('data-id');
-                var qty = $(this).val();
-                var cart = JSON.parse(localStorage.getItem('cart'));
-                if (qty == 0) {
-                    Swal.fire({
-                        icon: 'warning',
-                        text: 'Xóa khỏi giỏ hàng?',
-                        showDenyButton: true,
-                        showCancelButton: false,
-                        confirmButtonText: 'Đúng',
-                        denyButtonText: `Không`,
-                    }).then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            var arr = [];
-                            cart.forEach(el => {
-                                if (el[0] != id) {
-                                    arr.push(el);
-                                }
-                            });
-                            if (arr.length == 0) {
-                                localStorage.removeItem('cart');
-                            } else {
-                                localStorage.setItem('cart', JSON.stringify(arr));
-                            }
+                  }
+              })
 
-                            Toast.fire({
-                                icon: 'success',
-                                title: 'Đã xóa !'
-                            }).then(() => {
-                                loadCart()
-                            })
+          });
+      }
+      function editQuantity() {
+          $(".qtyinput").change(function (e) {
+              e.preventDefault();
+              var id = $(this).attr('data-id');
+              var qty = $(this).val();
+              var cart = JSON.parse(localStorage.getItem('cart'));
+              if (qty == 0) {
+                  Swal.fire({
+                      icon: 'warning',
+                      text: 'Xóa khỏi giỏ hàng?',
+                      showDenyButton: true,
+                      showCancelButton: false,
+                      confirmButtonText: 'Đúng',
+                      denyButtonText: `Không`,
+                  }).then((result) => {
+                      /* Read more about isConfirmed, isDenied below */
+                      if (result.isConfirmed) {
+                          var arr = [];
+                          cart.forEach(el => {
+                              if (el[0] != id) {
+                                  arr.push(el);
+                              }
+                          });
+                          if (arr.length == 0) {
+                              localStorage.removeItem('cart');
+                          } else {
+                              localStorage.setItem('cart', JSON.stringify(arr));
+                          }
+
+                          Toast.fire({
+                              icon: 'success',
+                              title: 'Đã xóa !'
+                          }).then(() => {
+                              loadCart()
+                          })
 
 
-                        } else if (result.isDenied) {
-                            loadCart();
-                        }
-                    })
-                } else {
-                    cart.forEach(el => {
-                        if (el[0] == id) {
-                            el[1] = qty;
-                        }
-                    });
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                }
-                loadCart();
-            });
-        }
-    </script>
-    
+                      } else if (result.isDenied) {
+                          loadCart();
+                      }
+                  })
+              } else {
+                  cart.forEach(el => {
+                      if (el[0] == id) {
+                          el[1] = qty;
+                      }
+                  });
+                  localStorage.setItem('cart', JSON.stringify(cart));
+              }
+              loadCart();
+          });
+      }
+  </script>
+
+
 </body>
 </html>
