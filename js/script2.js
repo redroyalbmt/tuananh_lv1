@@ -5,14 +5,13 @@ $(document).ready(function () {
 function addtocart(){
     if(localStorage.getItem('cart') && localStorage.getItem('cart')!=null){
         var result = localStorage.getItem('cart');
-        var arr = JSON.parse(result);
+        
     }else{
         var arr=[];
     
     }
+$('#addtocarbtn').click(function (e) { 
 
-
-$('.addtocarbtn').click(function (e) { 
     e.preventDefault();
        var index=$(this).attr('data-id');
        var name=$(this).attr('data-name');
@@ -23,7 +22,7 @@ $('.addtocarbtn').click(function (e) {
         item.price=price;
         item.qty=1;
         var check=false;
-        arr.forEach(el1 => {
+        arr.forEach(el => {
             if(el1.id==index){
                 el1.qty++;
                 check=true;
@@ -47,12 +46,13 @@ function render(){
         <td colspan=6 scope="row">chua co gio hang</td>
         </tr>
         `;
-        $("#resultcart").html(str)
+        $("#cartressult").html(str)
         
 
     }else{
-        $("#resultcart").html(result)
-        deleteCart()
+        $("#cartressult").html(result)
+        deleteCart();
+        fetch();
     }
         
     
