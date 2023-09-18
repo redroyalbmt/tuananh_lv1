@@ -1,6 +1,7 @@
 $(document).ready(function () {
     logout();
     getData();
+
 });
 var w = window.innerWidth;
 const api = 'https://students.trungthanhweb.com/api/';
@@ -90,12 +91,14 @@ function getData(){
             cateProducts.forEach(el => {
                 str=`
                 <div class="item">
-                        <div class="card" style="width: 100%">
+                        <div class="card" style="width: 100%; box-shadow: 1px 1px 1px 1px rgb(130, 130, 130);
+                 
+                        margin-bottom: 20px;
+                        border-radius: 7px;">
                         <a href="ctsp.html?id=`+ el.id + `">    
                             <img class="pt-2" style="height: auto;
                             width: 100%;
-                            box-shadow: 2px 2px 2px 2px rgb(130, 130, 130);
-                            border-radius: 7px;
+                      
                             margin: 0px auto;" src="`+(imageURL+el.image)+`" alt="">
                             </a>
                             <div class="card-body">
@@ -114,13 +117,13 @@ function getData(){
             brandproducts.forEach(el => {
                 str=`
                 <div class="item">
-                        <div class="card" style="width: 100%;">
+                        <div class="card" style="width: 100%; box-shadow: 1px 1px 1px 1px rgb(130, 130, 130);
+                 
+                        margin-bottom: 20px;
+                        border-radius: 7px; ">
                         <a href="ctsp.html?id=`+ el.id + `">    
                         <img class="pt-2" style="height: auto;
-                        width: 100%;    padding: 10px 10px;
-                        box-shadow: 2px 2px 2px 2px rgb(130, 130, 130);
-                        margin-bottom: 20px;
-                        border-radius: 7px;
+                        width: 100%;
                         margin: 0px auto;" src="`+(imageURL+el.image)+`" alt="">
                         </a>
                             <div class="card-body">
@@ -224,6 +227,7 @@ function addToCart(){
     $("#addTocartBtn").click(function (e) { 
         e.preventDefault();
         var id=params.get('id');
+
         if(localStorage.getItem('cart')&&localStorage.getItem('cart')!=null){
             var cart =localStorage.getItem('cart');
             var arr = JSON.parse(cart);
@@ -233,6 +237,7 @@ function addToCart(){
         var check=false;
         arr.forEach(el => {
             if(el[0]==id){
+              
                 el[1]++;
                 check=true;
             }
@@ -245,9 +250,13 @@ function addToCart(){
         Toast.fire({
             icon: 'success',
             title: 'Đã thêm thành công'
-        })
+          
+        });
     });
 }
+
+//123
+
 // log out
 function logout() {
 
@@ -272,3 +281,4 @@ function logout() {
       }
     });
     }
+  
