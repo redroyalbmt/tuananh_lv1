@@ -224,6 +224,7 @@ const Toast = Swal.mixin({
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
+  ///login
 function checkLogin(){
     if(!localStorage.getItem('token')||localStorage.getItem('token')==null){
         window.location.replace('index.html');
@@ -326,6 +327,7 @@ function getData(url){
         }
     });
 }
+///tim kiem
 function searchPrice(id){
         var lowprice = $("#giathap").val();
         var maxprice = $("#giacao").val();
@@ -469,7 +471,7 @@ function searchPrice(id){
         }
         $("#pagination").hide();
 }
-
+///addtocart
 function addToCart() {
     if (!localStorage.getItem("cart") || localStorage.getItem('cart') == null) {
         var arr = [];
@@ -501,7 +503,7 @@ function addToCart() {
     });
 }
 
-// =================================================
+// log out
 function logout() {
 
 if (!localStorage.getItem("token") && localStorage.getItem("token") == null) {
