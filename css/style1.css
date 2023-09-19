@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;1,500;1,700&display=swap');
 
-*{
+* {
+
+    box-sizing: border-box;
     font-family: 'Times New Roman', Times, serif;
 }
 .navbar1{
@@ -10,9 +12,9 @@
     height: 50px;
     width: auto;
 }
-.nav-item{
+/* .nav-item{
     height: 65px;
-}
+} */
 .nav-link{
     padding-top: 30%;
 }
