@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;1,500;1,700&display=swap');
+
 *{
     font-family: 'Times New Roman', Times, serif;
     box-sizing: border-box;
@@ -51,4 +53,58 @@ a {
 .container2 {
     width: 88%;
     margin: 10px auto;
+}
+/* footer */
+.footer1{
+    background-color:  #515154 ;
+    color: white;
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+footer h3{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    padding-bottom: 10px;
+
+}
+footer p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+}
+footer li{
+    float: none;
+    list-style: none;
+    display: inline;
+}
+footer li a{
+    color: white;
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    transition: 0.4s;
+    text-decoration: none;
+    font-size: 20px;
+
+}
+footer .footer1 ul{
+    display: inline;
+}
+.footer2{
+    background-color:  #626263 ;
+    color: white;
+    padding: 10px;
+
+}
+.footer2 p {
+    font-size: 12px;
+    padding-top: 13px;
+}
+footer ul li a:hover{
+    background: white;
+    color: aqua;
 }
