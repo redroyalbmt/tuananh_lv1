@@ -84,7 +84,7 @@ function getData(){
             sliderImageChange();
             const content = products.content;
             $("#content").html(content);
-            //Đi lấy sản phẩm cùng loại
+            //lay san pham cung loai
             const cateProducts = res.cateproducts;
             const brandproducts = res.brandproducts;
             var str=``;
