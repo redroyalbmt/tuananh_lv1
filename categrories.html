@@ -224,6 +224,7 @@ toast.addEventListener('mouseenter', Swal.stopTimer)
 toast.addEventListener('mouseleave', Swal.resumeTimer)
 }
 })
+///log in
 function checkLogin(){
 if(!localStorage.getItem('token')||localStorage.getItem('token')==null){
 window.location.replace('index.html');
@@ -231,6 +232,7 @@ window.location.replace('index.html');
 }
 const api='https://students.trungthanhweb.com/api/';
 const image='https://students.trungthanhweb.com/images/'
+///get data
 function getData(url){
 const params = new URLSearchParams(window.location.search);
 
@@ -469,7 +471,7 @@ switch (option) {
 }
 $("#pagination").hide();
 }
-
+// addtocart
 function addToCart() {
 if (!localStorage.getItem("cart") || localStorage.getItem('cart') == null) {
 var arr = [];
@@ -501,7 +503,7 @@ Toast.fire({
 });
 }
 
-// =================================================
+// log out
 function logout() {
 
 if (!localStorage.getItem("token") && localStorage.getItem("token") == null) {
