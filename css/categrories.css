@@ -108,3 +108,8 @@ footer ul li a:hover{
     background: white;
     color: aqua;
 }
+.carousel-inner {
+
+    width: 102%;
+
+}
