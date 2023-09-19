@@ -1,0 +1,402 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/stylectsp.css">
+<script src="js/alert.js"></script>
+<script src="js/code.jquery.com_jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+th{
+    border:1px solid black;
+}
+td{
+    border:1px solid black;
+}
+</style> 
+</head>
+<body>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Login Modal</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="text" id="email" placeholder="Email" class="form-control mb-2">
+              <input type="text" id="api_token" placeholder="apitoken" class="form-control">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="checkloginbtn">Login</button>
+      
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end modal -->
+      <!-- edit modal -->
+      <div class="modal fade" id="ThanhToanModal" tabindex="-1" aria-labelledby="ThanhToanModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ThanhToanModalLabel">Thông Tin Thanh Toán</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="text" class="form-control w-100 mb-2" id="tenKH" placeholder="Tên khách hàng ">
+              <input type="text" class="form-control w-100 mb-2" id="phone" placeholder="Số điện thoại ">
+              <input type="text" class="form-control w-100 mb-2" id="address" placeholder="Địa chỉ ">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+              <button type="button" class="btn btn-primary" id="submitCheckOut">Thanh Toán</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      <!-- end edit modal -->
+    <nav class="navbar navbar1 navbar-expand-sm navbar-dark bg-secondary">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+              <li class="nav-item">
+                <a class="active" aria-current="page" href="#">
+                    <img class="logo"src="img/Capture.PNG">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Thương Hiệu
+                </a>
+                <ul class="dropdown-menu" id="brandsUL" aria-labelledby="navbarDropdown">
+                 
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="
+                margin-top: -2px;
+            ">
+                  Loại sản Phẩm
+                </a>
+                <ul class="dropdown-menu" id="loaispUL" aria-labelledby="navbarDropdown">
+                  
+                </ul>
+              </li>
+              <form class="d-flex" style="    margin-left: 568px;margin-top: 2px;">
+
+
+                <a href="cart.html"> <button class="btn btn-warning ms-3 " type="button" style="height: 36px;">
+ 
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+       <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+     </svg>
+                 </button> </a>
+               
+ 
+               </form>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>          
+ 
+            </form>
+  <div class="d-flex1">
+                <button class="btn btn-warning ms-3 " type="button" id="loginbtn">Đăng Nhập</button> 
+                <button class="btn btn-warning ms-2 " type="button" id="logoutbtn">Đăng Xuất</button> 
+              </div>
+              
+
+          </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-4">
+        <h2 style="    font-family: 'Montserrat', sans-serif;
+        ">Thông Tin Hóa Đơn</h2>
+        <div class="table-responsive desktopcart " >
+                                <table class="table table-primary " >
+
+                <thead class="table-secondary " style="text-align: center;  border: 1px solid;
+                ">
+                    <tr>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Số Điện Thoại</th>
+                        <th scope="col">Ngày Mua</th>
+                        <th scope="col">Địa Chỉ</th>
+
+                    </tr>
+                    
+                </thead>
+                
+                <tbody id="resultbill">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="mobicart">
+            <div class="accordion accordion-flush" id="accordionFlushCart">
+               
+            </div>
+        </div>
+
+    </div>
+    <div class="contarner2">
+        
+    </div>
+    <!-- <footer>
+        <div class="footer1">
+          <div class="container">
+            <div class="row">
+               
+               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+                  <h3>LOCATION</h3>
+                  <p>77 Lê Trung Nghĩa<br>P.12.Tân Bình</p>
+               </div>
+               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+                <h3>FANPAGE</h3>
+                <ul>
+                  <li><a href="" class="fa fa-facebook"></a>  </li>
+                  <li><a href="" class="fa fa-google-plus"></a>  </li>
+                  <li><a href="" class="fa fa-twitter"></a>  </li>
+                  <li><a href="" class="fa fa-linkedin"></a>  </li>
+                  <li><a href="" class="fa fa-dribbble"></a>  </li>
+                </ul>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+                <h3>CONTACT</h3>
+              <p>LE TUAN ANH <br> 09123456789</p>
+      
+              </div>
+            </div> 
+            <!-- end row -->
+          <!-- </div> -->
+          <!-- end container -->
+        <!-- </div> -->
+         <!-- and fotter 1 -->
+        <!-- <div class="footer2">
+        <div class="container text-center">
+            <p>copyright @ Your Website Tuan Anh</p>
+        </div>
+      </div>
+      </footer> --> -->
+<script>
+    $(document).ready(function () {
+    login(); logout();loadData()
+});
+const url = 'https://students.trungthanhweb.com/api/';      
+var link = url + 'home'; //string 
+const image = 'https://students.trungthanhweb.com/images/';
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1700,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  ////data
+function loadData(){
+    $("#logoutbtn").hide();
+    if (localStorage.getItem('token') && localStorage.getItem('token') != null) {
+        $("#loginBtn").hide();
+        $("#logoutbtn").show();
+        $.ajax({
+        type: "GET",
+        url: link,
+        data: {
+            apitoken: localStorage.getItem('token'),
+        },
+        dataType: "JSON",
+        success: function (res) {
+            const brands = res.brands;
+            const categrories = res.categrories;
+            const products = res.products.data;
+            if (brands.length > 0) {
+                var str = ``;
+                brands.forEach(el => {
+                    str += `
+                        <li><a class="dropdown-item" href="brands.html?id=`+el.id+`">`+ el.name + `</a></li>
+                        `
+                });
+                $("#brandsUL").html(str);
+            }
+            if (categrories.length > 0) {
+                var str = ``;
+                categrories.forEach(el => {
+                    str += `
+                        <li><a class="dropdown-item" href="categrories.html?id=`+el.id+`">`+ el.name + `</a></li>
+                        `
+                });
+                $("#loaispUL").html(str);
+            }
+        }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: url+"bills",
+            data: {
+                apitoken:localStorage.getItem('token')
+            },
+            dataType: "JSON",
+            success: function (res) {
+                if(res.check==true &&res.bills.length>0){
+                    var str = ``;
+                    const bills = res.bills;
+                    console.log(bills);
+                    bills.forEach(el => {
+                        str+=`
+                        <tr class="table-primary" style="border:black;text-align:center;  border: 1px solid;">
+                            <td class="table-borderless" scope="row" data-id="`+el.id+`">`+el.tenKH+ `</td>
+                            <td class="table-borderless" scope="row" data-id="`+el.id+`">`+el.phone+ `</td>
+                            <td class="table-borderless" scope="row" data-id="`+el.id+`">`+el.created_at+ `</td>
+                            <td class="table-borderless" scope="row" data-id="`+el.id+`">`+el.address+ `</td>
+
+                        </tr>
+                        `
+                    });
+                    $("#resultbill").html(str);
+                    $("#resultbill").removeClass('hideclass');
+                    billdetail();
+                }
+            }
+        });
+    }else{
+        window.location.replace('index.html');
+    }
+}
+////billl
+function billdetail(){
+    $('.billdetailselect').click(function (e) { 
+        e.preventDefault();
+        $(".list-group-item").removeClass('active');
+        $(this).addClass('active');
+        var id = $(this).attr('data-id');
+        $.ajax({
+            type: "GET",
+            url: url+"singlebill",
+            data: {
+                apitoken:localStorage.getItem('token'),
+                id:id
+            },
+            dataType: "JSON",
+            success: function (res) {
+                const bill = res.result;
+                if(bill.length>0){
+                    var sum =0;
+                    var str=``;
+                    bill.forEach((el,index) => {
+                        str+=`
+                        <tr class="">
+                        <td scope="row">`+(++index)+`</td>
+                            <td class="text-center"><img style="height: 140px;
+                            width: auto;" src="`+image+el.image+`" alt=""></td>
+                            <td>`+el.productname+`</td>
+                            <td>`+Intl.NumberFormat('en-US').format(el.price)+`</td>
+                            <td>`+el.qty+`</td>
+                            <td>`+Intl.NumberFormat('en-US').format(Number(el.price)*Number(el.qty))+`</td>
+                        </tr>
+                        `
+                        sum+=(Number(el.price)*Number(el.qty));
+                    });
+                    str+=`
+                    <tr class="table-dark">
+                    <td colspan="5" scope="row">Tổng tiền</td>
+                    <td scope="row">`+Intl.NumberFormat('en-US').format(sum)+`</td>
+                    </tr>
+                    `
+                    $("#resultbilldetail").html(str);
+                    $("#billdetailtable").removeClass('hideclass');
+                }
+            }
+        });
+    });
+}
+////logout
+function logout() {
+
+if (!localStorage.getItem("token") && localStorage.getItem("token") == null) {
+  $("#logoutbtn").hide();
+  $("#showmorebtn").hide();
+} else {
+  $("#loginbtn").hide();
+}
+$("#logoutbtn").click(function (e) {
+  
+  e.preventDefault();;
+  if (!localStorage.removeItem("token") && localStorage.removeItem("token") == null) {
+    localStorage.removeItem('token');
+    Toast.fire({
+      icon: 'success',
+      title: 'Tạm Biệt',
+    }).then(() => {
+        window.location.assign("index.html");
+    });
+
+  }
+});
+}
+//   login
+function login() {
+    $("#loginBtn").click(function (e) {
+        e.preventDefault();
+        $("#LoginModal").modal('show');
+        $("#submitloginBtn").click(function (e) {
+            e.preventDefault();
+            var email = $("#email").val().trim();
+            if (email == '') {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Thiếu  email'
+                })
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: "https://students.trungthanhweb.com/api/checkLoginhtml",
+                    data: {
+                        // Name : Giá trị 
+                        email: email
+                    },
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.check == true) {
+                            console.log(res.apitoken);
+                            localStorage.setItem('token', res.apitoken);
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Đăng nhập thành công'
+                            }).then(() => {
+                                window.location.reload();
+                            })
+
+                        } else {
+                            if (res.msg.email) {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: res.msg.email
+                                })
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    });
+}
+</script>
+</body>
+</html>
