@@ -248,7 +248,7 @@
                  
                   } else {
                       $("#submitCheckOut").attr('disabled', 'disabled');
-                      var cart = JSON.parse(localStorage.getItem('cart'));
+                      var cart = localStorage.getItem('cart');
                       $.ajax({
                           type: "POST",
                           url: url + "createBill",
