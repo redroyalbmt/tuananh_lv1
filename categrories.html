@@ -218,7 +218,7 @@
 
 <script>
     $(document).ready(function () {
-        logout() ;checkLogin();getData(),addToCart()
+        logout() ;checkLogin();getData(),addToCart(); getError()
 });
 const Toast = Swal.mixin({
 toast: true,
@@ -534,6 +534,25 @@ window.location.assign("index.html");
 }
 });
 }
+////gio hàng
+function getError(){
+            const params = new URLSearchParams(window.location.search);
+            if(params.has("err")){
+                switch (params.get("err")) {
+                    case 'emtycart':
+                            Toast.fire({
+                            icon: 'warning',
+                            title: 'Giỏ hàng rỗng'
+                        }).then(()=>{
+                            window.location.replace('index.html')
+                        })
+                        break;
+                
+                    default:
+                        break;
+                }
+            }
+        }
 
 </script>
 </body>
