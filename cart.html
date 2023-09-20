@@ -42,6 +42,11 @@
               <input type="text" class="form-control w-100 mb-2" id="tenKH" placeholder="Tên khách hàng ">
               <input type="text" class="form-control w-100 mb-2" id="phone" placeholder="Số điện thoại ">
               <input type="text" class="form-control w-100 mb-2" id="address" placeholder="Địa chỉ ">
+          
+            
+
+
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
@@ -180,6 +185,7 @@
       $(document).ready(function () {
            logout(); loadCart();
           CheckOut();
+       
       });
       const url = 'https://students.trungthanhweb.com/api/';
 ////in thong bao
@@ -195,6 +201,9 @@
           }
       })
 
+ 
+
+     
       ////checkout
       function CheckOut() {
           $("#checkoutBtn").click(function (e) {
@@ -206,26 +215,37 @@
                   var tenKH = $("#tenKH").val().trim();
                   var phone = $("#phone").val().trim();
                   var address = $("#address").val().trim();
+
+
+
                   if (tenKH == '') {
                       Toast.fire({
                           icon: 'warning',
                           title: 'Thiếu Tên Nhé??'
                       })
+                      
+                      
                   } else if (phone == '') {
                       Toast.fire({
                           icon: 'warning',
                           title: 'Thiếu STD Nhé'
                       })
+                      
                   } else if (address == '') {
                       Toast.fire({
                           icon: 'warning',
                           title: 'Quên Địa Chỉ Kìa ?'
                       })
+                      
+                 
                   } else if (!phone.match(format)) {
                       Toast.fire({
                           icon: 'warning',
                           title: 'Số Không Có !!!'
                       })
+                    
+                
+                 
                   } else {
                       $("#submitCheckOut").attr('disabled', 'disabled');
                       var cart = JSON.parse(localStorage.getItem('cart'));
@@ -304,7 +324,7 @@ $("#logoutbtn").click(function (e) {
                               var str = ``;
                               brands.forEach(el => {
                                   str += `
-                              <li><a class="dropdown-item" href="#">`+ el.name + `</a></li>
+                                  <li><a class="dropdown-item" href="brands.html?id=`+el.id+`">`+ el.name + `</a></li>
                               `
                               });
                               $("#brandsUL").html(str);
