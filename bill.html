@@ -130,7 +130,7 @@ td{
                 <thead class="table-secondary " style="text-align: center;  border: 1px solid;
                 ">
                     <tr>
-                        <th scope="col">Tên</th>
+                        <th scope="col">Tên</th><but></but>
                         <th scope="col">Số Điện Thoại</th>
                         <th scope="col">Ngày Mua</th>
                         <th scope="col">Địa Chỉ</th>
@@ -498,6 +498,46 @@ function searchProducts(){
 
             })
         }
+        ////delete
+        function deleteCart() {
+          $(".deleteCartItem").click(function (e) {
+              e.preventDefault();
+              Swal.fire({
+                  icon: 'question',
+                  text: 'Xóa sản phẩm khỏi giỏ hàng?',
+                  showDenyButton: true,
+                  showCancelButton: false,
+                  confirmButtonText: 'Xóa',
+                  denyButtonText: `Không`,
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      var id = $(this).attr('data-id');
+                      var arr = [];
+                      console.log(id);
+                      var cart = JSON.parse(localStorage.getItem('cart'));
+                      cart.forEach(el => {
+                          if (el[0] != id) {
+                              arr.push(el);
+                          }
+                      });
+                      if (arr.length == 0) {
+                          localStorage.removeItem('cart');
+                      } else {
+                          localStorage.setItem('cart', JSON.stringify(arr));
+                      }
+                      Toast.fire({
+                          icon: 'success',
+                          title: 'Đã xóa khỏi giỏ hàng'
+                      }).then(() => {
+                          loadCart();
+                      })
+                  } else if (result.isDenied) {
+
+                  }
+              })
+
+          });
+      }
 </script>
 </body>
 </html>
