@@ -1,6 +1,9 @@
 $(document).ready(function () {
     logout();
     getData();
+    getError();
+
+        
 
 });
 var w = window.innerWidth;
@@ -281,4 +284,24 @@ function logout() {
       }
     });
     }
-  
+  ////giohangrong
+  function getError(){
+    const params = new URLSearchParams(window.location.search);
+    if(params.has("err")){
+        switch (params.get("err")) {
+            case 'emtycart':
+                    Toast.fire({
+                    icon: 'warning',
+                    title: 'Giỏ hàng rỗng'
+                }).then(()=>{
+                    window.location.replace('index.html')
+                })
+                break;
+        
+            default:
+                break;
+        }
+    }
+}
+
+/////search
