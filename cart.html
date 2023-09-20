@@ -264,11 +264,11 @@
                           success: function (res) {
                               if (res.check == true) {
                                   Toast.fire({
-                                      icon: 'warning',
+                                      icon: 'success',
                                       title: 'Đặt hàng thành công'
                                   }).then(() => {
                                       localStorage.removeItem('cart');
-                                      window.location.replace('index.html');
+                                      window.location.assign('bill.html');
                                   })
                               }
                           }
