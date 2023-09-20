@@ -95,3 +95,9 @@ footer ul li a:hover{
     width: 102%;
 
 }
+.mobicart{
+    display: none;
+}
+.desktopcart{
+    display: block;
+}
