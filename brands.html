@@ -103,8 +103,8 @@
                   </form>
                 </ul>
                 <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>          
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchProduct">
+                  <button class="btn btn-outline-success" type="submit"id="searchBtn">Search</button>          
      
                 </form>
       <div class="d-flex1">
@@ -218,7 +218,7 @@
         </footer>
         <script>
             $(document).ready(function () {
-                logout() ;checkLogin();getData(),addToCart()
+                logout() ;checkLogin();getData(),addToCart();getError();
 });
 const Toast = Swal.mixin({
     toast: true,
@@ -534,7 +534,27 @@ $("#logoutbtn").click(function (e) {
   }
 });
 }
-
+/////eror gio hàng
+function getError(){
+            const params = new URLSearchParams(window.location.search);
+            if(params.has("err")){
+                switch (params.get("err")) {
+                    case 'emtycart':
+                            Toast.fire({
+                            icon: 'warning',
+                            title: 'Giỏ hàng rỗng'
+                        }).then(()=>{
+                            window.location.replace('index.html')
+                        })
+                        break;
+                
+                    default:
+                        break;
+                }
+            }
+        }
+        ///////search
+        
         </script>
 </body>
 </html>
